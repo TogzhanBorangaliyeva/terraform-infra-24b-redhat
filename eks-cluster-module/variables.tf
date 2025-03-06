@@ -68,16 +68,6 @@ variable "key_name" {
   type        = string
 }
 
-variable "sso_admin_role" {
-  description = "SSO Admin Role Name"
-  type        = string
-}
-
-variable "github_actions_cicd_role" {
-  description = "GitHub Actions CICD Role Name"
-  type        = string
-}
-
 variable "github_actions_terraform_role" {
   description = "GitHub Actions Terraform Role Name"
   type        = string
