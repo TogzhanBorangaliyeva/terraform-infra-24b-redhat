@@ -14,3 +14,17 @@ private_subnets = [
   "192.168.15.0/24"
 ]
 availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+# EKS tfvars
+cluster_name                 = "redhat-eks-cluster-staging"
+kubernetes_version           = "1.31"
+eks_worker_node              = "redhat-eks-worker-node-staging"
+instance_type                = "t3.large"
+desired_capacity             = 4
+max_size                     = 6
+min_size                     = 2
+on_demand_base_capacity      = 1
+on_demand_percentage         = 30
+spot_max_price               = "0.06"
+key_name                     = "eks-key-staging"
+max_session_duration_cluster = 43200

@@ -16,3 +16,63 @@ module "vpc" {
   private_subnets    = var.private_subnets
 }
 
+#EKS module
+module "eks" {
+  source                       = "../../eks-cluster-module"
+  public_subnet_ids            = module.vpc.public_subnet_ids
+  vpc_id                       = module.vpc.vpc_id
+  cluster_name                 = var.cluster_name
+  kubernetes_version           = var.kubernetes_version
+  max_session_duration_cluster = var.max_session_duration_cluster
+
+  eks_worker_node               = var.eks_worker_node
+  instance_type                 = var.instance_type
+  desired_capacity              = var.desired_capacity
+  max_size                      = var.max_size
+  min_size                      = var.min_size
+  on_demand_base_capacity       = var.on_demand_base_capacity
+  on_demand_percentage          = var.on_demand_percentage
+  spot_max_price                = var.spot_max_price
+  key_name                      = var.key_name
+  sso_admin_role                = var.sso_admin_role
+  github_actions_cicd_role      = var.github_actions_cicd_role
+  github_actions_terraform_role = var.github_actions_terraform_role
+}
+
+data "aws_eks_cluster_auth" "eks_cluster_auth" {
+  name  = module.eks.cluster_name
+}
+
+provider "kubernetes" {
+  host                   = module.eks.eks_cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
+  token                  = data.aws_eks_cluster_auth.eks_cluster_auth.token
+}
+
+data "aws_caller_identity" "current" {}
+
+resource "kubernetes_config_map" "aws_auth" {
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+
+  depends_on = [
+    module.eks
+  ]
+
+  data = {
+    mapRoles = <<EOT
+- rolearn: ${module.eks.eks_worker_role_arn}
+  username: system:node:{{EC2PrivateDNSName}}
+  groups:
+    - system:bootstrappers
+    - system:nodes
+    - system:masters
+- rolearn: arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.github_actions_terraform_role}
+  username: terraform
+  groups:
+    - system:masters
+EOT
+  }
+}

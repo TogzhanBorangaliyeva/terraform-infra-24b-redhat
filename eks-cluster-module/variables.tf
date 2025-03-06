@@ -1,35 +1,3 @@
-variable "greeting" {
-  description = "A greeting phrase"
-}
-
-# VPC variables
-variable "cidr_block" {
-  type        = string
-  description = "CIDR block for the VPC"
-}
-
-variable "project_name" {
-  type        = string
-  description = "The project name"
-}
-
-variable "availability_zones" {
-  type        = list(string)
-  description = "List of availability zones to use for the subnets"
-}
-
-variable "public_subnets" {
-  type        = list(string)
-  description = "CIDR blocks for public subnets"
-}
-
-variable "private_subnets" {
-  type        = list(string)
-  description = "CIDR blocks for private subnets"
-}
-
-
-# EKS variables
 variable "cluster_name" {
   description = "EKS Cluster Name"
   type        = string
@@ -37,6 +5,16 @@ variable "cluster_name" {
 
 variable "kubernetes_version" {
   description = "Kubernetes version one release prior to the latest supported by EKS"
+  type        = string
+}
+
+variable "public_subnet_ids" {
+  description = "List of public subnets for EKS cluster"
+  type        = list(string)
+}
+
+variable "vpc_id" {
+  description = "VPC ID"
   type        = string
 }
 
