@@ -14,3 +14,7 @@ output "eks_worker_role_arn" {
   description = "The ARN of the EKS worker role"
   value       = aws_iam_role.eks_worker_role.arn
 }
+
+output "eks_cluster_arn" {
+  value = aws_eks_cluster.eks_cluster.arn
+}
