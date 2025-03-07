@@ -2,6 +2,10 @@ variable "asg_name" {
   type = string
 }
 
+variable "cluster_name" {
+  type = string
+}
+
 variable "role_name" {
   description = "cluster-autoscaler"
   type        = string

@@ -1,21 +1,19 @@
-resource "aws_autoscaling_group_tag" "example" {
+resource "aws_autoscaling_group_tag" "eks_asg_tag_1" {
   autoscaling_group_name = var.asg_name
 
   tag {
     key   = "k8s.io/cluster-autoscaler/enabled"
     value = "true"
-
     propagate_at_launch = true
   }
 }
 
-resource "aws_autoscaling_group_tag" "example" {
+resource "aws_autoscaling_group_tag" "eks_asg_tag_2" {
   autoscaling_group_name = var.asg_name
 
   tag {
-    key   = "k8s.io/cluster-autoscaler/enabled"
+    key   = "k8s.io/cluster-autoscaler/${var.cluster_name}"
     value = "true"
-
     propagate_at_launch = true
   }
 }

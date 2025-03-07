@@ -86,6 +86,7 @@ EOT
 module "cluster_autoscaler" {
   source      = "../../autoscaler"
   asg_name    = var.asg_name
+  cluster_name = var.cluster_name
   role_name   = var.role_name
   policy_name = var.policy_name
   #   eks_cluster_arn                    = var.eks_cluster_arn
