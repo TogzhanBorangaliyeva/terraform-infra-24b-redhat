@@ -177,7 +177,7 @@ resource "aws_security_group_rule" "node_ingress_8443" {
 
 resource "aws_security_group_rule" "node_ingress_udp_dns" {
   type                     = "ingress"
-  description              = "Allow CoreDNS to resolve cluster services"
+  description              = "Allow CoreDNS to resolve cluster services."
   from_port                = 53
   to_port                  = 53
   protocol                 = "udp"
