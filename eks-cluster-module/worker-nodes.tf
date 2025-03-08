@@ -164,3 +164,24 @@ resource "aws_security_group_rule" "worker_nodes_egress_internet" {
   security_group_id = aws_security_group.node_sg.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+resource "aws_security_group_rule" "node_ingress_8443" {
+  type                     = "ingress"
+  description              = "Allow webhook validation requests to ingress-nginx admission controller"
+  from_port                = 8443
+  to_port                  = 8443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.node_sg.id
+  source_security_group_id = aws_security_group.eks_sg.id
+}
+
+resource "aws_security_group_rule" "node_ingress_udp_dns" {
+  type                     = "ingress"
+  description              = "Allow CoreDNS to resolve cluster services"
+  from_port                = 53
+  to_port                  = 53
+  protocol                 = "udp"
+  security_group_id        = aws_security_group.node_sg.id
+  source_security_group_id = aws_security_group.node_sg.id
+}
+
