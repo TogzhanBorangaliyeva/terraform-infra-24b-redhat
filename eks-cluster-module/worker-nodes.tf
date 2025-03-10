@@ -212,3 +212,13 @@ resource "aws_security_group_rule" "https" {
   security_group_id        = aws_security_group.node_sg.id
   cidr_blocks              = ["0.0.0.0/0"]
 }
+
+resource "aws_security_group_rule" "allow_all_ports_ipv6" {
+  type              = "ingress"
+  description       = "Allow all traffic from my IPv6 for testing"
+  from_port        = 0
+  to_port          = 65535
+  protocol         = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  ipv6_cidr_blocks = ["2601:246:5400:ef60:78f3:b673:5b02:bc03/128"]  # Replace with your IPv6
+}
