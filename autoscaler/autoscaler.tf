@@ -1,4 +1,4 @@
-resource "aws_autoscaling_group_tag" "eks_asg_tag_1" {
+resource "aws_autoscaling_group_tag" "eks_asg_tag-1" {
   autoscaling_group_name = var.asg_name
 
   tag {
@@ -8,7 +8,7 @@ resource "aws_autoscaling_group_tag" "eks_asg_tag_1" {
   }
 }
 
-resource "aws_autoscaling_group_tag" "eks_asg_tag_2" {
+resource "aws_autoscaling_group_tag" "eks_asg_tag-2" {
   autoscaling_group_name = var.asg_name
 
   tag {
