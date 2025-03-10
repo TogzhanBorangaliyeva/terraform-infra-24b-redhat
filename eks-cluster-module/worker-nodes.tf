@@ -145,15 +145,15 @@ resource "aws_security_group_rule" "node_ingress" {
   source_security_group_id = aws_security_group.eks_sg.id
 }
 
-resource "aws_security_group_rule" "node_ingress_2" {
-  type                     = "ingress"
-  description              = "Allow pods running extension API servers on port 443 to receive communication from cluster control plane"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.node_sg.id
-  source_security_group_id = aws_security_group.eks_sg.id
-}
+# resource "aws_security_group_rule" "node_ingress_2" {
+#   type                     = "ingress"
+#   description              = "Allow pods running extension API servers on port 80 to receive communication from cluster control plane"
+#   from_port                = 80
+#   to_port                  = 80
+#   protocol                 = "tcp"
+#   security_group_id        = aws_security_group.node_sg.id
+#   source_security_group_id = aws_security_group.eks_sg.id
+# }
 
 resource "aws_security_group_rule" "ssh" {
   type              = "ingress"
