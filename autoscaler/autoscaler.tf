@@ -81,6 +81,7 @@ resource "aws_iam_policy" "cluster_autoscaler_policy" {
         "ec2:DescribeInstanceTypes",
         "ec2:DescribeRegions",
         "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeLaunchTemplates",
         "ec2:DescribeLaunchTemplateVersions"
       ],
       "Effect": "Allow",
