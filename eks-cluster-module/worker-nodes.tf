@@ -135,14 +135,13 @@ resource "aws_security_group_rule" "node_self_ingress" {
   source_security_group_id = aws_security_group.node_sg.id
 }
 
-resource "aws_security_group_rule" "node_ingress_443" {
+resource "aws_security_group_rule" "node_ingress" {
   type                     = "ingress"
-  description              = "Allow pods running extension API servers on port 443 to receive communication from cluster control plane and from the internet"
+  description              = "Allow pods running extension API servers on port 443 to receive communication from cluster control plane"
   from_port                = 443
   to_port                  = 443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.node_sg.id
-  cidr_blocks              = ["0.0.0.0/0"]
   source_security_group_id = aws_security_group.eks_sg.id
 }
 
@@ -200,6 +199,15 @@ resource "aws_security_group_rule" "http" {
   type                     = "ingress"
   from_port                = 80
   to_port                  = 80
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.node_sg.id
+  cidr_blocks              = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "https" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.node_sg.id
   cidr_blocks              = ["0.0.0.0/0"]
