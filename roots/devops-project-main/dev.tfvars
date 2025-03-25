@@ -22,13 +22,13 @@ max_session_duration_cluster  = 43200
 eks_worker_node               = "redhat-eks-worker-node"
 instance_type                 = "t3.small"
 desired_capacity              = 2
-max_size                      = 4
+max_size                      = 2
 min_size                      = 1
 on_demand_base_capacity       = 0
 on_demand_percentage          = 20
 spot_max_price                = "0.0464"
 key_name                      = "eks-key"
-github_actions_terraform_role = "platform-tools-24b-redhat-GHA-role"
+github_actions_terraform_role = "GitHubActionsTerraformIAMrole"
 
 # # Autoscaler
 # asg_name                           = "redhat-eks-cluster-dev-nodes"
