@@ -74,7 +74,7 @@ resource "kubernetes_config_map" "aws_auth" {
 EOT
     # Add the IAM user `mike` here
     mapUsers = <<EOT
-- userarn: arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/mike
+- userarn: arn:aws:iam::539247466139:user/mike
   username: mike
   groups:
     - system:masters
