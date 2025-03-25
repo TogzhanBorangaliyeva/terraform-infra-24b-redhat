@@ -90,10 +90,10 @@ variable "key_name" {
   type        = string
 }
 
-variable "github_actions_terraform_role" {
-  description = "GitHub Actions Terraform Role Name"
-  type        = string
-}
+# variable "github_actions_terraform_role" {
+#   description = "GitHub Actions Terraform Role Name"
+#   type        = string
+# }
 
 # #Autoscaler
 # variable "asg_name" {

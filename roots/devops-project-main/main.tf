@@ -34,7 +34,7 @@ module "eks" {
   on_demand_percentage          = var.on_demand_percentage
   spot_max_price                = var.spot_max_price
   key_name                      = var.key_name
-  github_actions_terraform_role = var.github_actions_terraform_role
+  # github_actions_terraform_role = var.github_actions_terraform_role
 }
 
 data "aws_eks_cluster_auth" "eks_cluster_auth" {
@@ -67,7 +67,7 @@ resource "kubernetes_config_map" "aws_auth" {
     - system:bootstrappers
     - system:nodes
     - system:masters
-- rolearn: arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.github_actions_terraform_role}
+- rolearn: arn:aws:iam::539247466139:role/platform-tools-24b-redhat-GHA-role
   username: terraform
   groups:
     - system:masters
