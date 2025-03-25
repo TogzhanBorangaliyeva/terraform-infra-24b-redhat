@@ -28,7 +28,7 @@ on_demand_base_capacity       = 0
 on_demand_percentage          = 20
 spot_max_price                = "0.0464"
 key_name                      = "eks-key"
-github_actions_terraform_role = "GitHubActionsTerraformIAMrole"
+github_actions_terraform_role = "platform-tools-24b-redhat-GHA-role"
 
 # # Autoscaler
 # asg_name                           = "redhat-eks-cluster-dev-nodes"
