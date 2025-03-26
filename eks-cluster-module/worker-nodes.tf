@@ -196,39 +196,39 @@ resource "aws_security_group_rule" "node_ingress_udp_dns" {
 }
 
 resource "aws_security_group_rule" "http" {
-  type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.node_sg.id
-  cidr_blocks              = ["0.0.0.0/0"]
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "https" {
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.node_sg.id
-  cidr_blocks              = ["0.0.0.0/0"]
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "allow_all_ports_ipv6" {
   type              = "ingress"
   description       = "Allow all traffic from my IPv6 for testing"
-  from_port        = 0
-  to_port          = 65535
-  protocol         = "tcp"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "tcp"
   security_group_id = aws_security_group.node_sg.id
-  ipv6_cidr_blocks = ["2601:246:5400:ef60:78f3:b673:5b02:bc03/128"]  # Replace with your IPv6
+  ipv6_cidr_blocks  = ["2601:246:5400:ef60:78f3:b673:5b02:bc03/128"] # Replace with your IPv6
 }
 
 resource "aws_security_group_rule" "allow_port_9200" {
   type              = "ingress"
   description       = "Allow local machine access to Elasticsearch"
-  from_port        = 9200
-  to_port          = 9200
-  protocol         = "tcp"
+  from_port         = 9200
+  to_port           = 9200
+  protocol          = "tcp"
   security_group_id = aws_security_group.node_sg.id
-  cidr_blocks      = ["0.0.0.0/0"] # Replace with your actual IP
+  cidr_blocks       = ["0.0.0.0/0"] # Replace with your actual IP
 }

@@ -126,3 +126,16 @@ variable "github_actions_terraform_role" {
 # #   description = "The ARN of the EKS cluster"
 # #   type        = string
 # # }
+
+# karpenter
+variable "eks_cluster_tls_cert_oidc" {
+  type = string
+}
+
+variable "oidc_thumbprint" {
+  type = string
+}
+
+variable "worker_node_iam_role" {
+  type = string
+}

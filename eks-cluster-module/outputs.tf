@@ -18,3 +18,20 @@ output "eks_worker_role_arn" {
 output "eks_cluster_arn" {
   value = aws_eks_cluster.eks_cluster.arn
 }
+
+# needed for oidc (Karpenter)
+data "tls_certificate" "eks" {
+  url = aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer
+}
+
+output "eks_cluster_tls_cert_oidc" {
+  value = aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer
+}
+
+output "oidc_thumbprint" {
+  value = data.tls_certificate.eks.certificates[0].sha1_fingerprint
+}
+
+output "worker_node_iam_role" {
+  value = aws_iam_role.eks_worker_role.name
+}
