@@ -76,17 +76,17 @@ resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller_attach" 
 
 resource "aws_iam_role_policy_attachment" "karpenter_attach_eks_worker_policies" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = [aws_iam_role.karpenter_controller.name]
+  role       = aws_iam_role.karpenter_controller.name
 }
 
 resource "aws_iam_role_policy_attachment" "karpenter_attach_ecr_read_only" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = [aws_iam_role.karpenter_controller.name]
+  role       = aws_iam_role.karpenter_controller.name
 }
 
 resource "aws_iam_role_policy_attachment" "karpenter_attach_eks_cni_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = [aws_iam_role.karpenter_controller.name]
+  role       = aws_iam_role.karpenter_controller.name
 }
 
 resource "aws_iam_instance_profile" "karpenter" {
