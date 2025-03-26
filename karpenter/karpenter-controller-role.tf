@@ -22,8 +22,50 @@ resource "aws_iam_role" "karpenter_controller" {
 }
 
 resource "aws_iam_policy" "karpenter_controller" {
-  policy = file("./controller-trust-policy.json")
   name   = "KarpenterController"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameter",
+          "iam:PassRole",
+          "ec2:RunInstances",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeLaunchTemplates",
+          "ec2:DescribeInstances",
+          "ec2:DescribeInstanceTypes",
+          "ec2:DescribeInstanceTypeOfferings",
+          "ec2:DescribeAvailabilityZones",
+          "ec2:DeleteLaunchTemplate",
+          "ec2:CreateTags",
+          "ec2:CreateLaunchTemplate",
+          "ec2:CreateFleet"
+        ]
+        Resource = "*"
+        Sid      = "Karpenter"
+      },
+      {
+        Effect = "Allow"
+        Action = "ec2:TerminateInstances"
+        Condition = {
+          StringLike = {
+            "ec2:ResourceTag/Name" = "*karpenter*"
+          }
+        }
+        Resource = "*"
+        Sid      = "ConditionalEC2Termination"
+      },
+      {
+        Effect   = "Allow"
+        Action   = "pricing:GetProducts"
+        Resource = "*"
+        Sid      = "PricingAnalyst"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller_attach" {
