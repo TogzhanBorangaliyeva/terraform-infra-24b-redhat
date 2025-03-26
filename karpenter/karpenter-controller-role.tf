@@ -1,3 +1,4 @@
+### IAM role for service account.
 data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
