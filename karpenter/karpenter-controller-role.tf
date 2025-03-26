@@ -22,7 +22,7 @@ resource "aws_iam_role" "karpenter_controller" {
 }
 
 resource "aws_iam_policy" "karpenter_controller" {
-  name   = "KarpenterController"
+  name = "KarpenterController"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
