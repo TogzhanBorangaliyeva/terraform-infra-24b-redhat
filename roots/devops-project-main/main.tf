@@ -99,4 +99,20 @@ module "karpenter" {
   eks_cluster_tls_cert_oidc = module.eks.eks_cluster_tls_cert_oidc
   oidc_thumbprint           = module.eks.oidc_thumbprint
   worker_node_iam_role      = module.eks.worker_node_iam_role
+  cluster_id = module.eks.cluster_id
+  eks_cluster_endpoint = module.eks.eks_cluster_endpoint
 }
+
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.eks_cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
+
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id]
+      command     = "aws"
+    }
+  }
+}
+

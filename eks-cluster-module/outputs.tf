@@ -35,3 +35,7 @@ output "oidc_thumbprint" {
 output "worker_node_iam_role" {
   value = aws_iam_role.eks_worker_role.name
 }
+
+output "cluster_id" {
+  value = aws_eks_cluster.eks_cluster.id
+}
