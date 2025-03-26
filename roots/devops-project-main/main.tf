@@ -101,7 +101,6 @@ module "karpenter" {
   worker_node_iam_role      = module.eks.worker_node_iam_role
   cluster_id                = module.eks.cluster_id
   eks_cluster_endpoint      = module.eks.eks_cluster_endpoint
-  eks_worker_role           = module.eks.eks_worker_role
 }
 
 provider "helm" {

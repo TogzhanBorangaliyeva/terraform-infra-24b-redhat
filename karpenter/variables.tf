@@ -18,6 +18,6 @@ variable "eks_cluster_endpoint" {
   type = string
 }
 
-variable "eks_worker_role" {
+variable "worker_node_iam_role" {
   type = string
 }
