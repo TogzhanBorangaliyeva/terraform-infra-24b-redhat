@@ -76,5 +76,5 @@ resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller_attach" 
 
 resource "aws_iam_instance_profile" "karpenter" {
   name = "KarpenterNodeInstanceProfile"
-  role = aws_iam_role.karpenter_controller.name  # Ensure correct role
+  role = var.worker_node_iam_role #aws_iam_role.karpenter_controller.name  # Ensure correct role
 }
