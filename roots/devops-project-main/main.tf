@@ -94,9 +94,9 @@ EOT
 #   cluster_autoscaler_service_account = var.cluster_autoscaler_service_account
 # }
 
-module "karpenter" {
-  source                    = "../../karpenter"
-  eks_cluster_tls_cert_oidc = module.eks.eks_cluster_tls_cert_oidc
-  oidc_thumbprint           = module.eks.oidc_thumbprint
-  worker_node_iam_role      = module.eks.worker_node_iam_role
-}
+# module "karpenter" {
+#   source                    = "../../karpenter"
+#   eks_cluster_tls_cert_oidc = module.eks.eks_cluster_tls_cert_oidc
+#   oidc_thumbprint           = module.eks.oidc_thumbprint
+#   worker_node_iam_role      = module.eks.worker_node_iam_role
+# }
