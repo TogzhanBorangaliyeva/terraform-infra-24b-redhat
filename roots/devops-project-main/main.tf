@@ -8,7 +8,7 @@ module "vpc" {
   private_subnets    = var.private_subnets
 }
 
-#EKS module
+# EKS module
 module "eks" {
   source                       = "../../eks-cluster-module"
   public_subnet_ids            = module.vpc.public_subnet_ids
@@ -29,6 +29,7 @@ module "eks" {
   github_actions_terraform_role = var.github_actions_terraform_role
 }
 
+# Karpenter module
 module "karpenter" {
   source                    = "../../karpenter"
   eks_cluster_tls_cert_oidc = module.eks.eks_cluster_tls_cert_oidc
@@ -37,6 +38,11 @@ module "karpenter" {
   cluster_id                = module.eks.cluster_id
   eks_cluster_endpoint      = module.eks.eks_cluster_endpoint
 }
+
+# Horizontal Pod Autoscaler module
+module "hpa" {
+  source = "../../horizontal-autoscaler"
+} 
 
 
 
