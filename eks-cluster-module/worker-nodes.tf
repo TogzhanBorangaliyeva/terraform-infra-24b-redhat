@@ -125,6 +125,16 @@ resource "aws_security_group" "node_sg" {
 
 }
 
+# for hpa, opening port to collect metrics
+resource "aws_security_group_rule" "allow_metrics" {
+  type              = "ingress"
+  from_port         = 10250
+  to_port           = 10250
+  protocol          = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]  # Or restrict to control plane's CIDR block
+}
+
 resource "aws_security_group_rule" "node_self_ingress" {
   type                     = "ingress"
   description              = "Allow nodes to communicate with each other"
