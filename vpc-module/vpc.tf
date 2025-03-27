@@ -36,9 +36,9 @@ resource "aws_subnet" "private" {
   availability_zone = element(var.availability_zones, count.index)
 
   tags = {
-    Name                                        = "eks-private-subnet-${count.index + 1}"
-    "kubernetes.io/cluster/${var.project_name}" = "owned"
-    "kubernetes.io/role/internal-elb"           = "1"
+    Name = "eks-private-subnet-${count.index + 1}"
+    # "kubernetes.io/cluster/${var.project_name}" = "owned" removed because karpenter ttrying to scadule new nodes in pribate subnets which doesn't have internet access.
+    "kubernetes.io/role/internal-elb" = "1"
   }
 }
 
@@ -60,8 +60,8 @@ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.k8svpc.id
 
   tags = {
-    Name                                        = "${var.project_name}-private-route-table"
-    "kubernetes.io/cluster/${var.project_name}" = "owned"
+    Name = "${var.project_name}-private-route-table"
+    # "kubernetes.io/cluster/${var.project_name}" = "owned" removed because karpenter ttrying to scadule new nodes in pribate subnets which doesn't have internet access.
   }
 }
 
