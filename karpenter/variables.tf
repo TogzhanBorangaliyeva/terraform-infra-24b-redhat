@@ -6,9 +6,9 @@ variable "oidc_thumbprint" {
   type = string
 }
 
-# variable "worker_node_iam_role" {
-#   type = string
-# }
+variable "worker_node_iam_role" {
+  type = string
+}
 
 variable "cluster_id" {
   type = string

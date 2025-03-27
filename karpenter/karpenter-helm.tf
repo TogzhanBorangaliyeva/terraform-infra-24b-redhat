@@ -8,8 +8,6 @@ resource "helm_release" "karpenter" {
   chart      = "karpenter"
   version    = "0.16.3"
 
-  timeout = 600
-
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = aws_iam_role.karpenter_controller.arn
@@ -27,6 +25,6 @@ resource "helm_release" "karpenter" {
 
   set {
     name  = "aws.defaultInstanceProfile"
-    value = aws_iam_instance_profile.karpenter.name #var.worker_node_iam_role  
+    value = aws_iam_instance_profile.karpenter.name 
   }
 }

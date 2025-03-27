@@ -74,22 +74,21 @@ resource "aws_iam_role_policy_attachment" "aws_load_balancer_controller_attach" 
   policy_arn = aws_iam_policy.karpenter_controller.arn
 }
 
-resource "aws_iam_role_policy_attachment" "karpenter_attach_eks_worker_policies" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.karpenter_controller.name
+data "aws_iam_policy" "ssm_managed_instance" {
+  arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_role_policy_attachment" "karpenter_attach_ecr_read_only" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.karpenter_controller.name
-}
-
-resource "aws_iam_role_policy_attachment" "karpenter_attach_eks_cni_policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.karpenter_controller.name
+resource "aws_iam_role_policy_attachment" "karpenter_ssm_policy" {
+  role       = var.worker_node_iam_role 
+  policy_arn = data.aws_iam_policy.ssm_managed_instance.arn
 }
 
 resource "aws_iam_instance_profile" "karpenter" {
   name = "KarpenterNodeInstanceProfile"
-  role = aws_iam_role.karpenter_controller.name  # Ensure correct role var.worker_node_iam_role 
+  role = var.worker_node_iam_role 
 }
+
+# resource "aws_iam_instance_profile" "karpenter" {
+#   name = "KarpenterNodeInstanceProfile"
+#   role = aws_iam_role.karpenter_controller.name  # Ensure correct role var.worker_node_iam_role 
+# }
