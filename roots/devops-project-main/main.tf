@@ -42,7 +42,7 @@ module "karpenter" {
 # Horizontal Pod Autoscaler module
 module "hpa" {
   source = "../../horizontal-autoscaler"
-} 
+}
 
 
 
