@@ -1,7 +1,3 @@
-variable "greeting" {
-  description = "A greeting phrase"
-}
-
 # VPC variables
 variable "cidr_block" {
   type        = string
@@ -94,48 +90,3 @@ variable "github_actions_terraform_role" {
   description = "GitHub Actions Terraform Role Name"
   type        = string
 }
-
-# #Autoscaler
-# variable "asg_name" {
-#   type = string
-# }
-
-# variable "role_name" {
-#   description = "cluster-autoscaler"
-#   type        = string
-# }
-
-
-# variable "policy_name" {
-#   description = "cluster-autoscaler-policy"
-#   type        = string
-# }
-
-
-# variable "aws_oidc_provider_arn" {
-#   description = "The OIDC provider ARN for the EKS cluster"
-#   type        = string
-# }
-
-# variable "cluster_autoscaler_service_account" {
-#   description = "The service account name for Cluster Autoscaler"
-#   type        = string
-# }
-
-# # variable "eks_cluster_arn" {
-# #   description = "The ARN of the EKS cluster"
-# #   type        = string
-# # }
-
-# # karpenter
-# variable "eks_cluster_tls_cert_oidc" {
-#   type = string
-# }
-
-# variable "oidc_thumbprint" {
-#   type = string
-# }
-
-# variable "worker_node_iam_role" {
-#   type = string
-# }

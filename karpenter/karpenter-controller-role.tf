@@ -87,8 +87,3 @@ resource "aws_iam_instance_profile" "karpenter" {
   name = "KarpenterNodeInstanceProfile"
   role = var.worker_node_iam_role 
 }
-
-# resource "aws_iam_instance_profile" "karpenter" {
-#   name = "KarpenterNodeInstanceProfile"
-#   role = aws_iam_role.karpenter_controller.name  # Ensure correct role var.worker_node_iam_role 
-# }

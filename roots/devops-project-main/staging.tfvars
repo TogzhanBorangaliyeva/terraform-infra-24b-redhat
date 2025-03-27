@@ -1,5 +1,3 @@
-greeting = "Hi"
-
 # VPC tfvars
 project_name = "redhat-eks-cluster-staging"
 cidr_block   = "192.168.0.0/16"

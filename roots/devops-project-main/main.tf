@@ -1,11 +1,3 @@
-# DO NOT REMOVE DUMMY MODULE references and their code, they should remain as examples
-module "module1" {
-  source = "../../dummy-module"
-  # ... any required variables for module1
-  greeting = var.greeting
-
-}
-
 # VPC module
 module "vpc" {
   source             = "../../vpc-module"
@@ -35,16 +27,6 @@ module "eks" {
   spot_max_price                = var.spot_max_price
   key_name                      = var.key_name
   github_actions_terraform_role = var.github_actions_terraform_role
-}
-
-data "aws_eks_cluster_auth" "eks_cluster_auth" {
-  name = module.eks.cluster_name
-}
-
-provider "kubernetes" {
-  host                   = module.eks.eks_cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
-  token                  = data.aws_eks_cluster_auth.eks_cluster_auth.token
 }
 
 data "aws_caller_identity" "current" {}
@@ -82,18 +64,6 @@ EOT
   }
 }
 
-# ###Autoscaler
-# module "cluster_autoscaler" {
-#   source       = "../../autoscaler"
-#   asg_name     = var.asg_name
-#   cluster_name = var.cluster_name
-#   role_name    = var.role_name
-#   policy_name  = var.policy_name
-#   #   eks_cluster_arn                    = var.eks_cluster_arn
-#   aws_oidc_provider_arn              = var.aws_oidc_provider_arn
-#   cluster_autoscaler_service_account = var.cluster_autoscaler_service_account
-# }
-
 module "karpenter" {
   source                    = "../../karpenter"
   eks_cluster_tls_cert_oidc = module.eks.eks_cluster_tls_cert_oidc
@@ -103,16 +73,5 @@ module "karpenter" {
   eks_cluster_endpoint      = module.eks.eks_cluster_endpoint
 }
 
-provider "helm" {
-  kubernetes {
-    host                   = module.eks.eks_cluster_endpoint
-    cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
 
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_id]
-      command     = "aws"
-    }
-  }
-}
 
