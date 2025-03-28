@@ -32,7 +32,7 @@ resource "aws_iam_policy" "grafana_role_policy" {
       ],
       "Effect": "Allow",
       "Resource": "arn:aws:secretsmanager:us-east-1:539247466139:secret:grafana_secrets-ttgkeA"
-    },
+    }
   ]
 }
 EOF
