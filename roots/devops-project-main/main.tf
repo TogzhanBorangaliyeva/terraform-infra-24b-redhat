@@ -44,6 +44,8 @@ module "hpa" {
   source = "../../horizontal-autoscaler"
 }
 
-
+module "iam-roles" {
+  source = "../../iam-roles"
+}
 
 
