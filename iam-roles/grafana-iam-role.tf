@@ -11,7 +11,7 @@ resource "aws_iam_role" "grafana_role" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
           StringEquals = {
-            "oidc.eks.us-east-1.amazonaws.com/id/91DEC1CCDF8A562681F7A8EAE98BD76A:sub" = "system:serviceaccount:<grafana-namespace>:grafana"
+            "oidc.eks.us-east-1.amazonaws.com/id/91DEC1CCDF8A562681F7A8EAE98BD76A:sub" = "system:serviceaccount:monitoring:grafana"
           }
         }
       }
