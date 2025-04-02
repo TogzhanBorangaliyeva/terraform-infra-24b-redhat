@@ -242,3 +242,13 @@ resource "aws_security_group_rule" "allow_port_9200" {
   security_group_id = aws_security_group.node_sg.id
   cidr_blocks       = ["0.0.0.0/0"] # Replace with your actual IP
 }
+
+resource "aws_security_group_rule" "allow_port_9300" {
+  type              = "ingress"
+  description       = "Allow inter-node communication for Elasticsearch"
+  from_port         = 9300
+  to_port           = 9300
+  protocol          = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  cidr_blocks       = ["0.0.0.0/0"] # Restrict this to your VPC CIDR for security
+}
