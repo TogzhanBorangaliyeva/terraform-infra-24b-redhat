@@ -252,3 +252,13 @@ resource "aws_security_group_rule" "allow_port_9300" {
   security_group_id = aws_security_group.node_sg.id
   cidr_blocks       = ["0.0.0.0/0"] # Restrict this to your VPC CIDR for security
 }
+
+resource "aws_security_group_rule" "allow_port_3306" {
+  type              = "ingress"
+  description       = "RDS"
+  from_port         = 3306
+  to_port           = 3306
+  protocol          = "tcp"
+  security_group_id = aws_security_group.node_sg.id
+  cidr_blocks       = ["0.0.0.0/0"] # Restrict this to your VPC CIDR for security
+}
